@@ -1,0 +1,28 @@
+.CourseDetailPanel {
+
+}
+
+.CourseDetailPanel > * {
+    margin-bottom: 10px;
+}
+
+.CourseDetailPanel > .CourseName{
+    font-size: 1.8em;
+}
+
+.CourseDetailPanel > .CourseSmallName {
+    color: rgba(0,0,0,0.6);
+}
+
+.CourseDetailPanel > .CourseAdmissionRequirements {
+
+}
+
+.CourseDetailPanel > .CourseGroups{
+
+}
+
+
+.Selectable:hover {
+    background-color: rgba(0,0,0,0.4);
+}

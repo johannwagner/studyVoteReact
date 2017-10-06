@@ -1,0 +1,19 @@
+.App {
+    text-align: center;
+    display: flex;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.App > .Sidebar {
+    width: 20%;
+    height: 100%;
+    background-color: #B0BEC5;
+    box-sizing: border-box;
+}
+.App > .Content {
+    width: 80%;
+    height: 100%;
+    background-color: #ECEFF1;
+    box-sizing: border-box;
+}

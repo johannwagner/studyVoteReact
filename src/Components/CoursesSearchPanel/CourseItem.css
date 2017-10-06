@@ -1,0 +1,19 @@
+.CourseItem {
+    border: #CFD8DC 1px solid;
+    border-radius: 2px;
+    padding: 10px;
+    margin: 10px 0;
+
+}
+
+.CourseItem:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.CourseItem > .CourseItemSmall {
+    font-size: 1em;
+}
+
+.CourseItem > .CourseItemMain{
+    font-size: 2em;
+}

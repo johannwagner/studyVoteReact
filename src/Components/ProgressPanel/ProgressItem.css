@@ -1,0 +1,42 @@
+.ProgressItem {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 1fr 1fr;
+
+    grid-template-areas:
+            "progressName progressBar"
+            "progressName progressInformation";
+
+    grid-row-gap: 10px;
+
+    border: #CFD8DC 1px solid;
+    border-radius: 2px;
+
+    justify-content: center;
+    align-items: center;
+
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.ProgressItem:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+
+
+.ProgressName {
+    grid-area: progressName;
+    font-size: 1.5em;
+}
+
+.ProgressBar {
+    grid-area: progressBar;
+}
+
+.ProgressBar > * {
+    margin: auto;
+}
+
+.progressInformation {
+    grid-area: progressInformation
+}

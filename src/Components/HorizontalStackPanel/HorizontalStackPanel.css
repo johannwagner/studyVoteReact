@@ -1,0 +1,58 @@
+.HorizontalStackPanel {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #90A4AE;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.StackChild {
+    width: 500px;
+    height: 80%;
+    /*box-sizing: border-box;*/
+    background-color: white;
+
+    margin: 30px 10px;
+}
+
+.StackChild > .StackTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #CFD8DC;
+    font-size: 1.5em;
+    height: 50px;
+}
+
+.StackChild > .StackTitle > .StackBack {
+    padding: 10px;
+
+}
+
+.StackChild > .StackTitle > .StackBack:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.StackChild > .StackTitle > .StackHeader{
+
+}
+
+.StackChild > .StackTitle > .StackAdditionalButton{
+    padding: 10px;
+}
+
+.StackChild > .StackTitle > .StackAdditionalButton:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.StackContent {
+    padding: 15px;
+    height: calc(100% - 50px);
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
