@@ -4,11 +4,6 @@ import './HorizontalStackPanel.css';
 import * as _ from 'lodash';
 
 class HorizontalStackPanel extends Component {
-    constructor() {
-        super();
-
-
-    }
 
     updateDimensions() {
 

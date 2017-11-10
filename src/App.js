@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import {connect} from "react-redux";
 import HorizontalStackPanel from "./Components/HorizontalStackPanel/HorizontalStackPanel";
@@ -10,6 +10,7 @@ import CoursesSearchPanel from "./Components/CoursesSearchPanel/CoursesSearchPan
 import StateActions from "./Actions/StateActions";
 import CourseDetailPanel from "./Components/CourseDetailPanel/CourseDetailPanel";
 import GroupPanel from "./Components/GroupPanel/GroupPanel";
+import AdmissionRequirementItemPanel from "./Components/AdmissionRequirementItemPanel/AdmissionRequirementItemPanel";
 
 class App extends Component {
     constructor() {
@@ -69,6 +70,14 @@ class App extends Component {
                       this.props.closeGroupDetail();
                   }}
               />
+              <AdmissionRequirementItemPanel
+                  showCondition={this.props.state.openAdmissionRequirementItem}
+                  stackTitle={'Admission Requirement'}
+                  hasBack={true}
+                  backAction={() => {
+                      this.props.closeAdmissionRequirementItem();
+                  }}
+              />
 
           </HorizontalStackPanel>
       </div>
@@ -86,7 +95,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     closeCourseSelector: StateActions.closeCourseSelector,
     closeCourseDetail: StateActions.closeCourseDetail,
-    closeGroupDetail: StateActions.closeGroupDetail
+    closeGroupDetail: StateActions.closeGroupDetail,
+    closeAdmissionRequirementItem: StateActions.closeAdmissionRequirementItem,
 };
 
 

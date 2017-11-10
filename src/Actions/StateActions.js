@@ -33,5 +33,16 @@ export default {
         return {
             type: "CLOSE_GROUP_DETAIL"
         }
+    },
+    openAdmissionRequirementItem: (aItemId) => {
+        return {
+            type: "OPEN_ADMISSION_REQUIREMENT_ITEM",
+            admissionRequirementId: aItemId
+        }
+    },
+    closeAdmissionRequirementItem: () => {
+        return {
+            type: "CLOSE_ADMISSION_REQUIREMENT_ITEM",
+        }
     }
 }

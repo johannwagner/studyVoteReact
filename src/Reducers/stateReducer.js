@@ -55,6 +55,18 @@ export default function locationReducer(state = defaultState, action) {
                 ...state,
                 openGroupDetail: false
             };
+        case "OPEN_ADMISSION_REQUIREMENT_ITEM":
+            return {
+                ...state,
+                openAdmissionRequirementItem: true,
+                openAdmissionRequirementItemId: action.admissionRequirementId
+            };
+        case "CLOSE_ADMISSION_REQUIREMENT_ITEM":
+            return {
+                ...state,
+                openAdmissionRequirementItem: false
+            };
+
         default:
             return state;
     }

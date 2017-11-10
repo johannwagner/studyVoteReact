@@ -5,13 +5,9 @@ import * as React from "react";
 import CourseItem from "./CourseItem";
 
 class CoursesSearchPanel extends Component {
-    constructor() {
-        super();
-
-    }
 
     componentDidMount() {
-        this.props.fetchCourses(this.props.loginToken, 1);
+        this.props.fetchCourses(this.props.loginToken, this.props.semesterId);
 
     }
 
@@ -34,7 +30,8 @@ class CoursesSearchPanel extends Component {
 const mapStateToProps = state => {
     return {
         courses: state.fetchedData.courseItems,
-        loginToken: state.login.loginToken
+        loginToken: state.login.loginToken,
+        semesterId: state.login.loginSemester.id
     }
 
 };

@@ -15,7 +15,7 @@ class AdmissionRequirement extends Component {
             .format("dddd, MMMM Do YYYY, hh:mm:ss a");
 
         return (
-            <div className="AdmissionRequirement">
+            <div onClick={this.props.onClick} className="AdmissionRequirement">
                 <div className="Type">
                     Admission Requirement Type: {typeTranslation[aReq.admissionRequirementType]}
                 </div>

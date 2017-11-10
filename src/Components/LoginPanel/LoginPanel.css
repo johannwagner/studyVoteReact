@@ -1,3 +1,8 @@
 .firstButton {
     margin-right: 10px;
 }
+
+.alertBox {
+    text-align: left;
+    padding: 8px;
+}

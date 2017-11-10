@@ -7,7 +7,6 @@ import FormControl from "react-bootstrap/es/FormControl";
 import InputGroup from "react-bootstrap/es/InputGroup";
 import FormGroup from "react-bootstrap/es/FormGroup";
 import ProgressPanelActions from "../../Actions/FetchDataActions";
-import Button from "react-bootstrap/es/Button";
 import StateActions from "../../Actions/StateActions";
 
 
@@ -32,7 +31,7 @@ class ProgressPanel extends Component {
     }
 
     componentDidMount(){
-        this.props.fetchProgress(this.props.login.loginToken);
+        this.props.fetchProgress(this.props.login.loginToken, this.props.login.loginSemester.id);
     }
 
     render() {

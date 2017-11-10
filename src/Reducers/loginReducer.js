@@ -1,4 +1,3 @@
-import LocationConstants from "../Constants/LocationConstants";
 import LoginStatus from "../Constants/LoginConstants";
 
 const defaultState = {
@@ -15,12 +14,14 @@ export default function locationReducer(state = defaultState, action) {
                 loginStatus: LoginStatus.LOGIN_PENDING
             };
 
+        case 'PUT_USER_ACCOUNT_FULFILLED':
         case 'LOGIN_FULFILLED':
 
             return {
                 ...state,
                 loginStatus: LoginStatus.LOGIN_FULFILLED,
-                loginToken: action.payload.data.token
+                loginToken: action.payload.data.token,
+                loginSemester: action.payload.data.semester
             };
 
         case 'LOGIN_REJECTED':

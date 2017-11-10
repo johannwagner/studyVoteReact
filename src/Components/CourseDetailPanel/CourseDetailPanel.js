@@ -25,6 +25,10 @@ class CourseDetailPanel extends Component {
 
     }
 
+    openAdmissionRequirementItem(admissionRequirementItem) {
+        this.props.openAdmissionRequirementItem(admissionRequirementItem.id);
+    }
+
     render() {
         let cInst = this.props.courseInstanceDetail;
 
@@ -43,8 +47,13 @@ class CourseDetailPanel extends Component {
                          cInst.admissionRequirement.admissionRequirementItems &&
                          cInst.admissionRequirement.admissionRequirementItems.map((aItem) => {
                             return (
-                                <ListGroupItem>
-                                    <AdmissionRequirement key={aItem.id} admissionRequirementItem={aItem}/>
+                                <ListGroupItem  className={'Selectable'}>
+                                    <AdmissionRequirement
+                                        onClick={() => {
+                                            this.openAdmissionRequirementItem(aItem)
+                                        }}
+                                        key={aItem.id}
+                                        admissionRequirementItem={aItem}/>
                                 </ListGroupItem>
                             )
                         })}
@@ -95,7 +104,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     fetchCourseInstanceDetail: FetchDataActions.fetchCourseInstanceDetail,
-    openGroupDetail: StateActions.openGroupDetail
+    openGroupDetail: StateActions.openGroupDetail,
+    openAdmissionRequirementItem: StateActions.openAdmissionRequirementItem
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseDetailPanel);
