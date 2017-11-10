@@ -2,10 +2,11 @@
 
     display: grid;
 
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(5, auto);
     grid-template-columns: repeat(5, 1fr);
 
     grid-template-areas:
+            "header header header header header"
             "docent docent docent docent docent"
             "weekDay weekDay . room room"
             "startTimeHours startTimeMinutes until endTimeHours endTimeMinutes"
@@ -36,6 +37,9 @@
 }
 .endTimeMinutes  {
     grid-area: endTimeMinutes;
+}
+.header {
+    grid-area: header;
 }
 .room  {
     grid-area: room;

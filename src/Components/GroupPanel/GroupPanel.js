@@ -8,6 +8,7 @@ import * as Moment from 'moment';
 import Button from "react-bootstrap/es/Button";
 import connect from "react-redux/es/connect/connect";
 import './GroupPanel.css'
+import GroupActions from "../../Actions/GroupActions";
 
 
 class GroupPanel extends Component {
@@ -37,22 +38,56 @@ class GroupPanel extends Component {
          * I just wanna update the current group without removing references, etc.
          */
 
+        const transmitData = {
+            room: roomText,
+            docent: docentText,
+            weekDay: weekDay,
+            endTime: {
+                hours: endTimeHours,
+                minutes: endTimeMinutes
+            },
+            startTime: {
+                hours: startTimeHours,
+                minutes: startTimeMinutes
+            }
+        };
+
         if(this.props.group) {
-            throw Error('Not implemented');
+            this.props.postGroup(this.props.clientToken, this.props.courseInstanceId,this.props.group.id, transmitData);
+        } else {
+            this.props.putGroup(this.props.clientToken, this.props.courseInstanceId, transmitData);
         }
 
-
-
+        this.props.backAction();
     }
 
     render() {
+
+        let startTimeHours, endTimeHours, startTimeMinutes, endTimeMinutes;
+
+        if(this.props.group) {
+
+            const startTime = new Date(this.props.group.startTime);
+            const endTime = new Date(this.props.group.endTime);
+
+            startTimeHours = startTime.getHours();
+            startTimeMinutes = startTime.getMinutes();
+            endTimeHours = endTime.getHours();
+            endTimeMinutes = endTime.getMinutes();
+
+
+        }
+
         return (
             <Form className={'GroupPanel'}>
+
+                <h2 className={'header'}> {this.props.group ? 'Edit Group' : 'Add Group'} </h2>
                 <FormGroup className={'room'}>
                     <FormControl
                         inputRef={ref => this.roomRef = ref}
                         type="text"
                         placeholder="Room"
+                        defaultValue={this.props.group && this.props.group.room}
                     />
                 </FormGroup>
 
@@ -61,6 +96,8 @@ class GroupPanel extends Component {
                         type="text"
                         placeholder="Docent"
                         inputRef={ref => this.docentRef = ref}
+                        defaultValue={this.props.group && this.props.group.docent}
+
                     />
                 </FormGroup>
                 <FormGroup className={'weekDay'}>
@@ -68,6 +105,7 @@ class GroupPanel extends Component {
                         componentClass="select"
                         placeholder="Week Day"
                         inputRef={ref => this.weekDayRef = ref}
+                        defaultValue={this.props.group && this.props.group.weekDay}
                     >
                         <option value={0}>Monday</option>
                         <option value={1}>Tuesday</option>
@@ -83,6 +121,7 @@ class GroupPanel extends Component {
                         type="number"
                         inputRef={ref => this.startTimeHoursRef = ref}
                         placeholder={11}
+                        defaultValue={startTimeHours}
                     />
                 </FormGroup>
                 <FormGroup className={'startTimeMinutes'}>
@@ -90,6 +129,7 @@ class GroupPanel extends Component {
                         type="number"
                         inputRef={ref => this.startTimeMinutesRef = ref}
                         placeholder={'00'}
+                        defaultValue={startTimeMinutes}
                     />
                 </FormGroup>
                 <span className={'until'}>until</span>
@@ -98,6 +138,7 @@ class GroupPanel extends Component {
                         type="number"
                         inputRef={ref => this.endTimeHoursRef = ref}
                         placeholder={13}
+                        defaultValue={endTimeHours}
                     />
                 </FormGroup>
                 <FormGroup className={'endTimeMinutes'}>
@@ -105,11 +146,12 @@ class GroupPanel extends Component {
                         type="number"
                         inputRef={ref => this.endTimeMinutesRef = ref}
                         placeholder={'00'}
+                        defaultValue={endTimeMinutes}
                     />
                 </FormGroup>
 
                 <Button className={'button'} onClick={this.onFinish.bind(this)}>
-                    Create Group
+                    {this.props.group ?  'Modify Group' : 'Create Group'}
                 </Button>
             </Form>
         );
@@ -117,6 +159,18 @@ class GroupPanel extends Component {
 }
 
 
+const mapDispatchToProps = {
+    putGroup: GroupActions.putGroup,
+    postGroup: GroupActions.postGroup,
+};
+
+const mapStateToProps = state => {
+
+  return {
+      courseInstanceId: state.state.openGroupDetailCourseInstanceId,
+      clientToken: state.login.loginToken
+  }
+};
 
 
-export default connect(null, null)(GroupPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupPanel);

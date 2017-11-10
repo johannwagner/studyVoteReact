@@ -48,7 +48,8 @@ export default function locationReducer(state = defaultState, action) {
                 ...state,
                 openGroupDetail: true,
                 openGroupDetailId: action.groupId,
-                openGroupDetailGroup: action.group
+                openGroupDetailGroup: action.group,
+                openGroupDetailCourseInstanceId: action.groupCourseInstanceId
             };
         case "CLOSE_GROUP_DETAIL":
             return {

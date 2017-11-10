@@ -22,9 +22,10 @@ export default {
             type: "CLOSE_COURSE_DETAIL"
         }
     },
-    openGroupDetail: (groupId, group) => {
+    openGroupDetail: (courseInstanceId, groupId, group) => {
         return {
             type: "OPEN_GROUP_DETAIL",
+            groupCourseInstanceId: courseInstanceId,
             groupId: groupId,
             group: group
         }

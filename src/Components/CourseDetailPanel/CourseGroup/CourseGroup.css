@@ -1,3 +1,16 @@
 .CourseGroup {
+    position: relative;
+}
+
+.CourseGroup > .editButton {
+    position: absolute;
+
+    top: 0px;
+    right: 0px;
+
+    padding: 5px;
+
+    width: 1.2em;
+    height: 1.2em;
 
 }

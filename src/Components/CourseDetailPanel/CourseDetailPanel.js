@@ -18,7 +18,7 @@ class CourseDetailPanel extends Component {
     }
 
     addGroup() {
-        this.props.openGroupDetail(null, null);
+        this.props.openGroupDetail(this.props.courseInstanceDetail.id, null, null);
     }
 
     addAdmissionRequirement() {
@@ -74,6 +74,9 @@ class CourseDetailPanel extends Component {
                             return (
                                 <ListGroupItem>
                                     <CourseGroup
+                                        onEdit={() => {
+                                            this.props.openGroupDetail(this.props.courseInstanceDetail.id, cG.groupId, cG)
+                                        }}
                                         key={cG.id}
                                         courseGroup={cG}/>
                                 </ListGroupItem>
@@ -98,7 +101,7 @@ class CourseDetailPanel extends Component {
 const mapStateToProps = state => {
     return {
         loginToken: state.login.loginToken,
-        courseInstanceDetail: state.fetchedData.courseInstanceDetail
+        courseInstanceDetail: state.fetchedData.courseInstanceDetail,
     }
 };
 

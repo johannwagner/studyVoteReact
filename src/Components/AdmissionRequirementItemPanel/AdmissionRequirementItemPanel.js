@@ -56,7 +56,6 @@ class AdmissionRequirementItemPanel extends React.Component {
                         <AdmissionRequirementItemWeek
                             key={JSON.stringify(item)}
                             onClick={() => {
-                                debugger;
                                 this.setState({semesterWeek: item.requirementWeek.semesterWeek})
                             }}
                             aItem={item}

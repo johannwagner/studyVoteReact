@@ -6,6 +6,26 @@ import {Component} from "react/cjs/react.production.min";
 
 class CourseGroup extends Component {
 
+    getDayFromInteger(number){
+        switch (number) {
+            case 0:
+                return 'Monday';
+            case 1:
+                return 'Tuesday';
+            case 2:
+                return 'Wednesday';
+            case 3:
+                return 'Thursday';
+            case 4:
+                return 'Friday';
+            case 5:
+                return 'Saturday';
+            case 6:
+                return 'Sunday';
+            default:
+                return 'Unknown Weekday'
+        }
+    }
 
     render() {
         let cG = this.props.courseGroup;
@@ -13,14 +33,17 @@ class CourseGroup extends Component {
         const momentStartDate = moment(cG.startTime);
         const momentEndDate = moment(cG.endTime);
 
-        cG.day = momentStartDate.format('dddd');
+        cG.day = this.getDayFromInteger(cG.weekDay);
         cG.displayStartTime = momentStartDate.format('hh:mm a');
         cG.displayEndTime = momentEndDate.format('hh:mm a');
 
         return (
             <div className="CourseGroup">
+                <div className="editButton" onClick={this.props.onEdit}>
+                    <i className={'fa fa-edit'}/>
+                </div>
                 <div className="groupDocent">
-                    Gunther Saake
+                    {cG.docent}
                 </div>
                 <div className="groupTimes">
                     {cG.day} - {cG.displayStartTime} - {cG.displayEndTime}
