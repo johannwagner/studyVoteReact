@@ -68,7 +68,7 @@ class CoursesSearchPanel extends Component {
                 })}
 
                 <div onClick={this.addCourse.bind(this)} className="CourseSearchPanelAdd">
-                    <span>Did you find your course ? Create it.</span>
+                    <span>Did you find your course ? If not, create it.</span>
                 </div>
 
             </div>
