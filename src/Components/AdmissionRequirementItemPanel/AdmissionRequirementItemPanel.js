@@ -46,7 +46,7 @@ class AdmissionRequirementItemPanel extends React.Component {
         }
 
 
-        const semesterWeekItem = this.props.userProgressPerCourseInstance.progress.find(p => p.requirementWeek.semesterWeek === this.state.semesterWeek);
+        const semesterWeekItem = this.props.userProgressPerCourseInstance.progress && this.props.userProgressPerCourseInstance.progress.find(p => p.requirementWeek.semesterWeek === this.state.semesterWeek);
 
 
         return [
