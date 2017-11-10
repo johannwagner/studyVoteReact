@@ -10,6 +10,7 @@ import CoursesSearchPanel from "./Components/CoursesSearchPanel/CoursesSearchPan
 import StateActions from "./Actions/StateActions";
 import CourseDetailPanel from "./Components/CourseDetailPanel/CourseDetailPanel";
 import GroupPanel from "./Components/GroupPanel/GroupPanel";
+import CourseAddPanel from "./Components/CourseAddPanel/CourseAddPanel";
 import AdmissionRequirementItemPanel from "./Components/AdmissionRequirementItemPanel/AdmissionRequirementItemPanel";
 
 class App extends Component {
@@ -59,6 +60,17 @@ class App extends Component {
                   }}
                   showCondition={this.props.state.openCourseSelector}
                   onSelect={this.props.state.openCourseSelectorFunction}
+                  forwardIcon={'fa-search'}
+                  showCoursesSearchPanelSearch={this.state.showCoursesSearchPanelSearch}
+                  forwardAction={() => this.setState({showCoursesSearchPanelSearch: !this.state.showCoursesSearchPanelSearch})}
+              />
+              <CourseAddPanel
+                  stackTitle={"Add Course"}
+                  hasBack={true}
+                  backAction={() => {
+                      this.props.closeCourseAdd();
+                  }}
+                  showCondition={this.props.state.openCourseAdd}
               />
               <GroupPanel
                   showCondition={this.props.state.openGroupDetail}
@@ -97,6 +109,7 @@ const mapDispatchToProps = {
     closeCourseDetail: StateActions.closeCourseDetail,
     closeGroupDetail: StateActions.closeGroupDetail,
     closeAdmissionRequirementItem: StateActions.closeAdmissionRequirementItem,
+    closeCourseAdd: StateActions.closeCourseAdd
 };
 
 

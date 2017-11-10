@@ -106,5 +106,28 @@ export default {
             type: "PUT_USER_ACCOUNT",
             payload: axios.put('http://localhost:1337/user', transferData)
         }
+    },
+    putCourse: (clientToken, semesterId, shortName, displayName, docent, room, weekDay, startTime, endTime) => {
+        let axiosConfig = {
+            headers: {
+                'X-Token': clientToken
+            }
+        };
+
+        const transferData = {
+            shortName: shortName,
+            displayName: displayName,
+            docent: docent,
+            semesterId: semesterId,
+            room: room,
+            weekDay: weekDay,
+            startTime: startTime,
+            endTime: endTime
+        };
+
+        return {
+            type: "PUT_COURSE",
+            payload: axios.put('http://localhost:1337/courseInstance', transferData, axiosConfig)
+        }
     }
 }
