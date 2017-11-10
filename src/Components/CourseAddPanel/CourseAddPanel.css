@@ -1,0 +1,58 @@
+.GroupPanel {
+
+    display: grid;
+
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
+
+    grid-template-areas:
+            "shortName shortName shortName shortName shortName"
+            "displayName displayName displayName displayName displayName"
+            "docent docent docent docent docent"
+            "weekDay weekDay . room room"
+            "startTimeHours startTimeMinutes until endTimeHours endTimeMinutes"
+            "button button button button button";
+
+    grid-gap: 0 10px;
+
+    box-sizing: border-box;
+
+}
+
+.docent  {
+    grid-area: docent;
+}
+.weekDay  {
+    grid-area: weekDay;
+}
+.startTimeHours  {
+    grid-area: startTimeHours;
+    text-align: right;
+}
+.startTimeMinutes  {
+    grid-area: startTimeMinutes;
+}
+.endTimeHours  {
+    grid-area: endTimeHours;
+    text-align: right;
+}
+.endTimeMinutes  {
+    grid-area: endTimeMinutes;
+}
+.room  {
+    grid-area: room;
+}
+.button {
+    grid-area: button;
+}
+.until {
+    grid-area: until;
+    padding: 0.5em;
+}
+.shortName {
+    grid-area: shortName;
+}
+
+.displayName {
+    grid-area: displayName;
+}

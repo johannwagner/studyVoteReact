@@ -45,5 +45,16 @@ export default {
         return {
             type: "CLOSE_ADMISSION_REQUIREMENT_ITEM",
         }
+    },
+    openCourseAdd: (onSelect) => {
+        return {
+            type: "OPEN_COURSE_ADD",
+            onSelect: onSelect
+        }
+    },
+    closeCourseAdd: () => {
+        return {
+            type: "CLOSE_COURSE_ADD"
+        }
     }
 }

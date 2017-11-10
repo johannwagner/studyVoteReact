@@ -2,3 +2,16 @@
 
 }
 
+.CourseSearchPanelAdd {
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.CourseSearchPanelAdd:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+
+

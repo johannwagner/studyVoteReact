@@ -6,7 +6,7 @@ const defaultState = {
     openCourseDetail: false,
     openCourseDetailId: null,
     openCourseDetailGroup: null,
-
+    openCourseAdd: false
 
 };
 
@@ -66,6 +66,17 @@ export default function locationReducer(state = defaultState, action) {
             return {
                 ...state,
                 openAdmissionRequirementItem: false
+            };
+
+        case "OPEN_COURSE_ADD":
+            return {
+                ...state,
+                openCourseAdd: true
+            };
+        case "CLOSE_COURSE_ADD":
+            return {
+                ...state,
+                openCourseAdd: false
             };
 
         default:
