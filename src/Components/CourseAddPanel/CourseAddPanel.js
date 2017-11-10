@@ -46,7 +46,7 @@ class CourseAddPanel extends Component {
 
     render() {
         return (
-            <Form className={'GroupPanel'}>
+            <Form className={'CourseAddPanel'}>
                 <FormGroup className={'shortName'}>
                     <FormControl
                         inputRef={ref => this.shortNameRef = ref}
