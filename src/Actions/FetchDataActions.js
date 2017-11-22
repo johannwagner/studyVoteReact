@@ -129,5 +129,39 @@ export default {
             type: "PUT_COURSE",
             payload: axios.put('http://localhost:1337/courseInstance', transferData, axiosConfig)
         }
+    },
+
+    putAdmissionRequirementItem: (clientToken, courseInstanceId, type, expireDate, minTasks, maxTasks, minPercentage, mandatory, description) => {
+        let axiosConfig = {
+            headers: {
+                'X-Token': clientToken
+            }
+        };
+
+        /*
+        * @param {number} courseInstanceId mandatory
+        * @param {number} admissionRequirementType admissionRequirementType
+        * @param {date} expireDate? the date this admissionRequirementItem expires
+        * @param {number} maxTasks? maxTasks for this admissionRequirementItem
+        * @param {number} minTasks? minTasks for this admissionRequirementItem to achieve
+        * @param {float} minPercentage? minPercentage for this admissionRequirementItem to achieve
+        * @param {bool} mandatory? use this admissionRequirementItem to calculate the userprogress
+        * @param {string} description the description of the arItem
+        */
+        const transferData = {
+            admissionRequirementType: type,
+            courseInstanceId: courseInstanceId,
+            expireDate: expireDate,
+            minTasks: minTasks,
+            maxTasks: maxTasks,
+            minPercentage: minPercentage,
+            mandatory: mandatory,
+            description: description
+        };
+
+        return {
+            type: "PUT_ADMISSIONREQUIREMENTITEM",
+            payload: axios.put('http://localhost:1337/admissionRequirement/item', transferData, axiosConfig)
+        }
     }
 }

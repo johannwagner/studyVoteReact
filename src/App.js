@@ -12,6 +12,7 @@ import CourseDetailPanel from "./Components/CourseDetailPanel/CourseDetailPanel"
 import GroupPanel from "./Components/GroupPanel/GroupPanel";
 import CourseAddPanel from "./Components/CourseAddPanel/CourseAddPanel";
 import AdmissionRequirementItemPanel from "./Components/AdmissionRequirementItemPanel/AdmissionRequirementItemPanel";
+import AdmissionRequirementItemAddPanel from "./Components/AdmissionRequirementItemAddPanel/AdmissionRequirementItemAddPanel";
 
 class App extends Component {
     constructor() {
@@ -88,6 +89,14 @@ class App extends Component {
                   hasBack={true}
                   backAction={() => {
                       this.props.closeAdmissionRequirementItem();
+                  }}
+              />
+              <AdmissionRequirementItemAddPanel
+                  showCondition={this.props.state.openAdmissionRequirementAdd}
+                  stackTitle={' Add Admissionrequirement'}
+                  hasBack={true}
+                  backAction={() => {
+                      this.props.closeAddAdmissionRequirementItem();
                   }}
               />
 

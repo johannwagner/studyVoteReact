@@ -22,7 +22,9 @@ class CourseDetailPanel extends Component {
     }
 
     addAdmissionRequirement() {
+        this.props.openAddAdmissionRequirementItem((admissionRequirementItem) => {
 
+        })
     }
 
     openAdmissionRequirementItem(admissionRequirementItem) {
@@ -108,7 +110,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     fetchCourseInstanceDetail: FetchDataActions.fetchCourseInstanceDetail,
     openGroupDetail: StateActions.openGroupDetail,
-    openAdmissionRequirementItem: StateActions.openAdmissionRequirementItem
+    openAdmissionRequirementItem: StateActions.openAdmissionRequirementItem,
+    openAddAdmissionRequirementItem: StateActions.openAddAdmissionRequirementItem
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseDetailPanel);

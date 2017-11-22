@@ -1,0 +1,58 @@
+.AdmissionRequirementItemAddPanel {
+
+    display: grid;
+
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-areas:
+            "admissionRequirementType admissionRequirementType admissionRequirementType"
+            "description description description"
+            "expireDate expireDate expireDate"
+            "mandatory mandatory mandatory"
+            "minTasks of maxTasks"
+            "percentage percentage percentage"
+            "button button button";
+
+    grid-gap: 0 10px;
+
+    box-sizing: border-box;
+
+}
+
+.mandatory  {
+    grid-area: mandatory;
+}
+.admissionRequirementType  {
+    grid-area: admissionRequirementType;
+}
+.maxTasks  {
+    grid-area: maxTasks;
+    text-align: right;
+}
+.description  {
+    grid-area: description;
+}
+.percentage  {
+    grid-area: percentage;
+}
+.minTasks  {
+    grid-area: minTasks;
+}
+.expireDate  {
+    grid-area: expireDate;
+}
+.button {
+    grid-area: button;
+}
+.of {
+    grid-area: of;
+    padding: 0.5em;
+}
+.shortName {
+    grid-area: shortName;
+}
+
+.displayName {
+    grid-area: displayName;
+}
