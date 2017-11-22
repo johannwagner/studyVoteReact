@@ -9,5 +9,12 @@ export default {
                 userPasswordHash: passwordHash
             })
         }
+    },
+
+    setSemester(semesterId) {
+        return {
+            type: "SEMESTER_CHANGE",
+            semesterId: semesterId
+        }
     }
 }

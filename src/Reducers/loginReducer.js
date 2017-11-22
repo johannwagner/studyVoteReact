@@ -21,13 +21,20 @@ export default function locationReducer(state = defaultState, action) {
                 ...state,
                 loginStatus: LoginStatus.LOGIN_FULFILLED,
                 loginToken: action.payload.data.token,
-                loginSemester: action.payload.data.semester
+                loginSemester: action.payload.data.semester,
+                semesterId: action.payload.data.semester.id,
             };
 
         case 'LOGIN_REJECTED':
             return {
                 ...state,
                 loginStatus: LoginStatus.LOGIN_REJECTED
+            };
+
+        case 'SEMESTER_CHANGE':
+            return {
+                ...state,
+                semesterId: action.semesterId
             };
 
         default:
