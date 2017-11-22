@@ -106,7 +106,7 @@ class AdmissionRequirementItemPanel extends React.Component {
                 <Button
                     onClick={this.sendAdmissionRequirementItemWeek.bind(this)}
                 >
-                    Boobs.
+                    Change
                 </Button>
             </div>
         ]
