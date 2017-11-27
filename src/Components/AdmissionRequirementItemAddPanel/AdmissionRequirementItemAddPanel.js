@@ -32,7 +32,6 @@ class AdmissionRequirementItemAddPanel extends Component {
         const maxTasksText = this.maxTasksRef.value === "" ? null : this.maxTasksRef.value;
         const minPercentageText = this.percentageRef.value === "" ? null : this.percentageRef.value;
 
-        debugger;
         this.props.putAdmissionRequirementItem(
             this.props.clientToken,
             this.props.courseInstanceDetail.id,
@@ -80,9 +79,9 @@ class AdmissionRequirementItemAddPanel extends Component {
                 />
 
                 <ButtonToolbar className={'mandatory'}>
-                    <ToggleButtonGroup  name="mandatory" type="radio" defaultValue={'optional'} ref={value => this.mandatoryRef = value}>
-                        <ToggleButton value={0}>Mandatory</ToggleButton>
-                        <ToggleButton value={1}>Optional</ToggleButton>
+                    <ToggleButtonGroup  name="mandatory" type="radio" defaultValue={0} ref={value => this.mandatoryRef = value}>
+                        <ToggleButton value={1}>Mandatory</ToggleButton>
+                        <ToggleButton value={0}>Optional</ToggleButton>
                     </ToggleButtonGroup>
                 </ButtonToolbar>
                 <FormGroup className={'minTasks'}>

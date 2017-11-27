@@ -118,7 +118,8 @@ const mapDispatchToProps = {
     closeCourseDetail: StateActions.closeCourseDetail,
     closeGroupDetail: StateActions.closeGroupDetail,
     closeAdmissionRequirementItem: StateActions.closeAdmissionRequirementItem,
-    closeCourseAdd: StateActions.closeCourseAdd
+    closeCourseAdd: StateActions.closeCourseAdd,
+    closeAddAdmissionRequirementItem: StateActions.closeAddAdmissionRequirementItem
 };
 
 
