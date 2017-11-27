@@ -82,7 +82,7 @@ const mapStateToProps = state => {
     return {
         courses: state.fetchedData.courseItems,
         loginToken: state.login.loginToken,
-        semesterId: state.login.loginSemester.id
+        semesterId: state.login.semesterId
     }
 
 };

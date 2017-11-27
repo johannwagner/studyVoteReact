@@ -135,7 +135,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         fetchedData: state.fetchedData,
         clientToken: state.login.loginToken,
-        semesterId: state.login.loginSemester.id
+        semesterId: state.login.semesterId
     }
 };
 

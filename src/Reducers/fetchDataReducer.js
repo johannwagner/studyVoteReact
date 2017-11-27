@@ -18,6 +18,8 @@ const defaultState = {
     putUserAccount: null,
     putUserAccountError: null,
 
+    semesterList: []
+
 };
 
 export default function locationReducer(state = defaultState, action) {
@@ -139,9 +141,14 @@ export default function locationReducer(state = defaultState, action) {
             return {
                 ...state,
                 putUserAccountPending: false,
-                putUserAccountError: action.data
+                putUserAccountError: action.payload.data
             };
 
+        case "GET_SEMESTER_FULFILLED":
+            return {
+                ...state,
+                semesterList: action.payload.data
+            };
         default:
             return state;
     }

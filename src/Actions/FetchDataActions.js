@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 
 export default {
-    fetchProgress: (clientToken, semesterId = 1) => {
+    fetchProgress: (clientToken, semesterId) => {
 
         let axiosConfig = {
             headers: {
@@ -17,7 +17,7 @@ export default {
             payload: axios.get('http://localhost:1337/userProgress', axiosConfig)
         }
     },
-    fetchCourses: (clientToken, semesterId = 1) => {
+    fetchCourses: (clientToken, semesterId) => {
 
         let axiosConfig = {
             headers: {
@@ -162,6 +162,14 @@ export default {
         return {
             type: "PUT_ADMISSIONREQUIREMENTITEM",
             payload: axios.put('http://localhost:1337/admissionRequirement/item', transferData, axiosConfig)
+        }
+    },
+    fetchSemester: (clientToken) => {
+        const axiosConfig = ActionHelper.generateAxiosConfig(clientToken);
+
+        return {
+            type: "GET_SEMESTER",
+            payload: axios.get('http://localhost:1337/semester', axiosConfig)
         }
     }
 }

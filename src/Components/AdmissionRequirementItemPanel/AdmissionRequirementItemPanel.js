@@ -5,7 +5,7 @@ import AdmissionRequirementItemWeek from "./AdmissionRequirementItemWeek";
 import {Button, FormControl} from 'react-bootstrap';
 import './AdmissionRequirementItemPanel.css'
 import * as axios from 'axios';
-
+import * as _ from 'lodash';
 
 class AdmissionRequirementItemPanel extends React.Component {
 
@@ -48,17 +48,40 @@ class AdmissionRequirementItemPanel extends React.Component {
 
         const semesterWeekItem = this.props.userProgressPerCourseInstance.progress && this.props.userProgressPerCourseInstance.progress.find(p => p.requirementWeek.semesterWeek === this.state.semesterWeek);
 
+        const filledWeeks = this.props.userProgressPerCourseInstance.progress.map((i) => i.requirementWeek.semesterWeek);
+        const lastSemesterWeek = _.max(filledWeeks);
+        const neededWeeks = _.xor(_.range(1,lastSemesterWeek + 1), filledWeeks);
+
+        const weekDisplayContainer = [
+            ...this.props.userProgressPerCourseInstance.progress.map((item) => {
+                return {
+                    semesterWeek: item.requirementWeek.semesterWeek,
+                    isEmpty: false,
+                    aItem: item
+                }
+            }),
+            ...neededWeeks.map(week => {
+                return {
+                    semesterWeek: week,
+                    isEmpty: true,
+                    aItem: null
+                }
+            })
+        ].sort((firstItem, secondItem) => firstItem.semesterWeek - secondItem.semesterWeek);
+
 
         return [
             <div className="AdmissionRequirementItem">
-                {this.props.userProgressPerCourseInstance.progress.map((item) => {
+                {weekDisplayContainer.map(displayItem => {
                     return (
                         <AdmissionRequirementItemWeek
-                            key={JSON.stringify(item)}
                             onClick={() => {
-                                this.setState({semesterWeek: item.requirementWeek.semesterWeek})
+                                this.setState({semesterWeek: displayItem.semesterWeek})
                             }}
-                            aItem={item}
+                            key={displayItem.semesterWeek}
+                            emptyWeek={displayItem.isEmpty}
+                            weekNumber={displayItem.semesterWeek}
+                            aItem={displayItem.aItem}
                         />
                     )
                 })}
@@ -83,7 +106,7 @@ class AdmissionRequirementItemPanel extends React.Component {
                 <Button
                     onClick={this.sendAdmissionRequirementItemWeek.bind(this)}
                 >
-                    Boobs.
+                    Change
                 </Button>
             </div>
         ]
@@ -96,7 +119,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         fetchedData: state.fetchedData,
         clientToken: state.login.loginToken,
-        semesterId: state.login.loginSemester.id,
+        semesterId: state.login.semesterId,
         courseInstanceId: state.fetchedData.courseInstanceDetail.id,
         userProgressPerCourseInstance: state.fetchedData.userProgressPerCourseInstance && state.fetchedData.userProgressPerCourseInstance.find((i) => i.id === state.state.openAdmissionRequirementItemId),
         admissionRequirementItem: state.fetchedData.courseInstanceDetail.admissionRequirement.admissionRequirementItems.find((i) => i.id === state.state.openAdmissionRequirementItemId),
