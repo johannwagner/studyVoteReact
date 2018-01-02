@@ -42,7 +42,10 @@ class AdmissionRequirementItemAddPanel extends Component {
             minPercentageText,
             mandatoryText,
             descriptionText
-        );
+        ).then(() =>
+        {
+            this.props.backAction();
+        }).catch(e => console.log(e));
     }
 
     handleExpireDateChange(newDate) {
@@ -108,7 +111,7 @@ class AdmissionRequirementItemAddPanel extends Component {
                 </FormGroup>
 
                 <Button className={'button'} onClick={this.onFinish.bind(this)}>
-                    Create Course
+                    Create Admissionrequirement
                 </Button>
             </Form>
         );

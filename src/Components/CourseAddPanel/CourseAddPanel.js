@@ -34,14 +34,17 @@ class CourseAddPanel extends Component {
         const endTimeMinutes = Number(this.endTimeMinutesRef.value);
 
         this.props.putCourse(this.props.clientToken, this.props.semesterId, shortNameText, displayNameText, roomText, docentText, weekDay,
-            {
-                hours: startTimeHours,
-                minutes: startTimeMinutes
-            },
-            {
-                hours: endTimeHours,
-                minutes: endTimeMinutes
-            });
+        {
+            hours: startTimeHours,
+            minutes: startTimeMinutes
+        },
+        {
+            hours: endTimeHours,
+            minutes: endTimeMinutes
+        }).then(() =>
+        {
+            this.props.backAction();
+        }).catch(e => console.log(e));
     }
 
     render() {
