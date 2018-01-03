@@ -9,6 +9,7 @@ import Button from "react-bootstrap/es/Button";
 import connect from "react-redux/es/connect/connect";
 import './GroupPanel.css'
 import GroupActions from "../../Actions/GroupActions";
+import FetchDataActions from "../../Actions/FetchDataActions";
 
 
 class GroupPanel extends Component {
@@ -53,7 +54,10 @@ class GroupPanel extends Component {
         };
 
         if(this.props.group) {
-            this.props.postGroup(this.props.clientToken, this.props.courseInstanceId,this.props.group.id, transmitData);
+            // Reload CourseInstance after editing to get updated groups
+            this.props.postGroup(this.props.clientToken, this.props.courseInstanceId,this.props.group.id, transmitData).then(() =>
+                    this.props.fetchCourseInstanceDetail(this.props.clientToken, this.props.courseInstanceId)
+            )
         } else {
             this.props.putGroup(this.props.clientToken, this.props.courseInstanceId, transmitData);
         }
@@ -162,6 +166,7 @@ class GroupPanel extends Component {
 const mapDispatchToProps = {
     putGroup: GroupActions.putGroup,
     postGroup: GroupActions.postGroup,
+    fetchCourseInstanceDetail: FetchDataActions.fetchCourseInstanceDetail
 };
 
 const mapStateToProps = state => {

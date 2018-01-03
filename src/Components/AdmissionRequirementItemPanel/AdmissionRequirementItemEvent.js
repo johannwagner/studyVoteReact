@@ -7,6 +7,9 @@ class AdmissionRequirementItemEvent extends React.Component {
         const progressBar = Math.ceil(aItem.result.tasksSolved * 100 / aItem.result.tasksAvailable);
         const expireDate = new Date(aItem.expireDate);
         return [
+            <div className="description">
+                {aItem.description}
+            </div>,
             <div className="eventDate">
                 Expiredate: {expireDate.toLocaleString()}
             </div>,

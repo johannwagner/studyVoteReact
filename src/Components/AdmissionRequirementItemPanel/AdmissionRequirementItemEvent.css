@@ -5,7 +5,7 @@
     grid-template-columns: 1fr 1fr;
 
     grid-template-areas:
-            "eventDate eventDate"
+            "description eventDate"
             "progress progress";
 
     grid-gap: 10px;
@@ -15,6 +15,10 @@
     border-radius: 5px;
     border: #CFD8DC 1px solid;
 
+}
+
+.AdmissionRequirementItemEvent > .description {
+    grid-area: description;
 }
 
 .AdmissionRequirementItemEvent > .eventDate {
