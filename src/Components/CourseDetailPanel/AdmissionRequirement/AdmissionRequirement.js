@@ -1,7 +1,7 @@
 import './AdmissionRequirement.css'
 import {Component} from "react/cjs/react.production.min";
 import * as React from "react";
-import * as moment from 'moment';
+//import * as moment from 'moment';
 
 class AdmissionRequirement extends Component {
 
@@ -11,8 +11,9 @@ class AdmissionRequirement extends Component {
         const typeTranslation = ['Vote', 'Event'];
 
         let aReq = this.props.admissionRequirementItem;
-        aReq.displayDate = moment(new Date(aReq.expireDate))
-            .format("dddd, MMMM Do YYYY, hh:mm:ss a");
+        //aReq.displayDate = moment(new Date(aReq.expireDate))
+         //   .format("dddd, MMMM Do YYYY, hh:mm:ss a");
+        aReq.displayDate = new Date(aReq.expireDate).toLocaleString();
 
         return (
             <div onClick={this.props.onClick} className="AdmissionRequirement">

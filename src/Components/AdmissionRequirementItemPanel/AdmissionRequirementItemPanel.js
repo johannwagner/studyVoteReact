@@ -6,6 +6,7 @@ import {Button, FormControl} from 'react-bootstrap';
 import './AdmissionRequirementItemPanel.css'
 import * as axios from 'axios';
 import * as _ from 'lodash';
+import AdmissionRequirementItemEvent from "./AdmissionRequirementItemEvent";
 
 class AdmissionRequirementItemPanel extends React.Component {
 
@@ -30,11 +31,25 @@ class AdmissionRequirementItemPanel extends React.Component {
         );
     }
 
+    sendAdmissionRequirementItemEvent() {
+        this.props.putAdmissionRequirementItemWeek(
+            this.props.clientToken,
+            this.props.admissionRequirementItemId,
+            this.eventTasksDone, // TasksDone
+            1, // TasksAvailable, always 1 having events
+            1, // Always use semesterWeek 1
+            () => {
+                this.props.fetchUserProgressPerCourseInstance(this.props.clientToken, this.props.courseInstanceId)
+            }
+        );
+    }
+
     componentDidMount() {
         this.props.fetchUserProgressPerCourseInstance(this.props.clientToken, this.props.courseInstanceId);
         axios.get('http://localhost:1337/semester/' + this.props.semesterId + '/currentWeek', {headers: {'X-Token': this.props.clientToken}}).then((data) => {
             this.setState({
-                semesterWeek: data.data.semesterWeek
+                semesterWeek: data.data.semesterWeek,
+                lastSemesterWeek: data.data.semesterWeek
             })
         })
     }
@@ -45,15 +60,32 @@ class AdmissionRequirementItemPanel extends React.Component {
             return null;
         }
 
+        // Handle different admissionRequirementTypes
+        switch(this.props.admissionRequirementItem.admissionRequirementType)
+        {
+            // Voting
+            case 0:
+                return this.renderSemesterWeeks();
+            // Event
+            case 1:
+                return this.renderSemesterEvent();
+            default:
+                return this.renderSemesterWeeks();
+        }
+    }
 
+    renderSemesterWeeks()
+    {
         const semesterWeekItem = this.props.userProgressPerCourseInstance.progress && this.props.userProgressPerCourseInstance.progress.find(p => p.requirementWeek.semesterWeek === this.state.semesterWeek);
 
-        const filledWeeks = this.props.userProgressPerCourseInstance.progress.map((i) => i.requirementWeek.semesterWeek);
-        const lastSemesterWeek = _.max(filledWeeks);
+        const progress = this.props.userProgressPerCourseInstance.progress ? this.props.userProgressPerCourseInstance.progress : [];
+        const  filledWeeks = progress.map((i) => i.requirementWeek.semesterWeek);
+
+        const lastSemesterWeek = this.state.lastSemesterWeek;//_.max(filledWeeks) ? _.max(filledWeeks) : this.state.lastSemesterWeek;
         const neededWeeks = _.xor(_.range(1,lastSemesterWeek + 1), filledWeeks);
 
         const weekDisplayContainer = [
-            ...this.props.userProgressPerCourseInstance.progress.map((item) => {
+            ...progress.map((item) => {
                 return {
                     semesterWeek: item.requirementWeek.semesterWeek,
                     isEmpty: false,
@@ -68,7 +100,6 @@ class AdmissionRequirementItemPanel extends React.Component {
                 }
             })
         ].sort((firstItem, secondItem) => firstItem.semesterWeek - secondItem.semesterWeek);
-
 
         return [
             <div className="AdmissionRequirementItem">
@@ -100,7 +131,7 @@ class AdmissionRequirementItemPanel extends React.Component {
                     type="number"
                     placeholder="Tasks Available"
                     inputRef={ref => this.tasksAvailable = ref}
-                    value={semesterWeekItem && semesterWeekItem.result.tasksAvailable}
+                    defaultValue={semesterWeekItem && semesterWeekItem.result.tasksAvailable}
                     disabled={!!semesterWeekItem}
                 />
                 <Button
@@ -110,7 +141,84 @@ class AdmissionRequirementItemPanel extends React.Component {
                 </Button>
             </div>
         ]
+    }
 
+    renderSemesterEvent()
+    {
+        let progress = this.props.userProgressPerCourseInstance.progress;
+        let buttonStyle = 'danger';
+        let buttonText = 'Failed';
+
+        // Handle cases if progress is already in DB or not
+        if(!this.props.userProgressPerCourseInstance.progress) {
+            // Build up display objects
+            progress = [
+                {
+                    aItem: {
+                        ...this.props.admissionRequirementItem,
+                        result:
+                            {
+                                tasksSolved: 0,
+                                tasksAvailable: 1
+                            }
+                    }
+                }
+            ];
+        }
+        else
+        {
+            // Build up display objects
+            progress[0].aItem = {
+                ...this.props.admissionRequirementItem,
+                result: progress[0].result
+            }
+
+        }
+
+        // Passed/Failed difference
+        if(progress[0].result.tasksSolved)
+        {
+            this.eventTasksDone = 0;
+        }
+        else
+        {
+            buttonStyle = 'success';
+            buttonText = 'Passed';
+            this.eventTasksDone = 1;
+        }
+
+        return [
+            <div className="AdmissionRequirementItem">
+                {progress.map(displayItem => {
+                    return (
+                        <AdmissionRequirementItemEvent
+                            key={displayItem.aItem.id}
+                            aItem={displayItem.aItem}
+                        />
+                    )
+                })}
+            </div>,
+            <div className="NewItem">
+                <h4>Mark this event as Passed/Failed</h4>
+                <Button
+                    onClick={this.sendAdmissionRequirementItemEvent.bind(this)}
+                    bsStyle={buttonStyle}
+                >
+                    {buttonText}
+                </Button>
+            </div>]
+        //return null;
+        /*if(this.props.admissionRequirementItem.type === 1)
+        {
+            neededWeeks.pop();
+            if(progress.length < 1)
+                progress.push({
+                    aItem: this.props.admissionRequirementItem,
+                    taskCount: 0,
+                    maxCount: 1,
+                    semesterWeek: 1
+                });
+        }*/
     }
 }
 
