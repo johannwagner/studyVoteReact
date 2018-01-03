@@ -34,8 +34,8 @@ class CourseGroup extends Component {
         const momentEndDate = moment(cG.endTime);
 
         cG.day = this.getDayFromInteger(cG.weekDay);
-        cG.displayStartTime = momentStartDate.format('hh:mm a');
-        cG.displayEndTime = momentEndDate.format('hh:mm a');
+        cG.displayStartTime = momentStartDate.format('HH:mm');
+        cG.displayEndTime = momentEndDate.format('HH:mm');
 
         return (
             <div className="CourseGroup">
