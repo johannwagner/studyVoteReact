@@ -155,7 +155,7 @@ class GroupPanel extends Component {
                 </FormGroup>
 
                 <Button className={'button'} onClick={this.onFinish.bind(this)}>
-                    {this.props.group ?  'Modify Group' : 'Create Group'}
+                    {this.props.group ?  'Edit Group' : 'Add Group' }
                 </Button>
             </Form>
         );

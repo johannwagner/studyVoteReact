@@ -32,20 +32,47 @@ class AdmissionRequirementItemAddPanel extends Component {
         const maxTasksText = this.maxTasksRef.value === "" ? null : this.maxTasksRef.value;
         const minPercentageText = this.percentageRef.value === "" ? null : this.percentageRef.value;
 
-        this.props.putAdmissionRequirementItem(
-            this.props.clientToken,
-            this.props.courseInstanceDetail.id,
-            admissionRequirementText,
-            this.expireDate,
-            minTasksText,
-            maxTasksText,
-            minPercentageText,
-            mandatoryText,
-            descriptionText
-        ).then(() =>
+        // Post if aItem already exists
+        if(this.props.aItem)
         {
-            this.props.backAction();
-        }).catch(e => console.log(e));
+            this.props.postAdmissionRequirementItem(
+                this.props.clientToken,
+                this.props.courseInstanceDetail.id,
+                admissionRequirementText,
+                this.expireDate,
+                minTasksText,
+                maxTasksText,
+                minPercentageText,
+                mandatoryText,
+                descriptionText,
+                this.props.aItem.id
+            ).then(() => {
+                return this.props.fetchCourseInstanceDetail(this.props.clientToken,
+                    this.props.courseInstanceDetail.id);
+            }).then(() =>
+            {
+                this.props.backAction();
+            }).catch(e => console.log(e));
+        }
+        // Put new aItem
+        else
+        {
+            this.props.putAdmissionRequirementItem(
+                this.props.clientToken,
+                this.props.courseInstanceDetail.id,
+                admissionRequirementText,
+                this.expireDate,
+                minTasksText,
+                maxTasksText,
+                minPercentageText,
+                mandatoryText,
+                descriptionText
+            ).then(() =>
+            {
+                this.props.backAction();
+            }).catch(e => console.log(e));
+        }
+
     }
 
     handleExpireDateChange(newDate) {
@@ -53,13 +80,19 @@ class AdmissionRequirementItemAddPanel extends Component {
     };
 
     render() {
+
+        let aItem = this.props.aItem;
+        console.log(aItem);
+
         return (
             <Form className={'AdmissionRequirementItemAddPanel'}>
+                <h2 className={'header'}> {this.props.aItem ? 'Edit Admissionrequirement' : 'Add Admissionrequirement'} </h2>
                 <FormGroup className={'admissionRequirementType'}>
                     <FormControl
                         componentClass="select"
                         placeholder="Vote"
                         inputRef={ref => this.admissionRequirementTypeRef = ref}
+                        defaultValue = {aItem && aItem.admissionRequirementType}
                     >
                         <option value={0}>Vote</option>
                         <option value={1}>Event</option>
@@ -71,18 +104,19 @@ class AdmissionRequirementItemAddPanel extends Component {
                         type="text"
                         placeholder="Description"
                         inputRef={ref => this.descriptionRef = ref}
+                        defaultValue = {aItem && aItem.description}
                     />
                 </FormGroup>
                 <DateTime
                     onChange={this.handleExpireDateChange.bind(this)}
                     className="expireDate"
-                    defaultValue={new Moment()}
+                    defaultValue={aItem ? new Date(aItem.expireDate).toLocaleDateString() : new Moment()}
                     dateFormat="DD.MM.YYYY"
                     timeFormat=""
                 />
 
                 <ButtonToolbar className={'mandatory'}>
-                    <ToggleButtonGroup  name="mandatory" type="radio" defaultValue={0} ref={value => this.mandatoryRef = value}>
+                    <ToggleButtonGroup  name="mandatory" type="radio" defaultValue={aItem ? aItem.mandatory : 1} ref={value => this.mandatoryRef = value}>
                         <ToggleButton value={1}>Mandatory</ToggleButton>
                         <ToggleButton value={0}>Optional</ToggleButton>
                     </ToggleButtonGroup>
@@ -92,6 +126,7 @@ class AdmissionRequirementItemAddPanel extends Component {
                         type="number"
                         inputRef={ref => this.minTasksRef = ref}
                         placeholder={'minTasks'}
+                        defaultValue = {aItem && aItem.minTasks}
                     />
                 </FormGroup>
                 <span className={'of'}>of</span>
@@ -100,6 +135,7 @@ class AdmissionRequirementItemAddPanel extends Component {
                         type="number"
                         inputRef={ref => this.maxTasksRef = ref}
                         placeholder={'maxTasks'}
+                        defaultValue = {aItem && aItem.maxTasks}
                     />
                 </FormGroup>
                 <FormGroup className={'percentage'}>
@@ -107,11 +143,12 @@ class AdmissionRequirementItemAddPanel extends Component {
                         type="number"
                         inputRef={ref => this.percentageRef = ref}
                         placeholder={'percentage'}
+                        defaultValue = {aItem && aItem.minPercentage}
                     />
                 </FormGroup>
 
                 <Button className={'button'} onClick={this.onFinish.bind(this)}>
-                    Create Admissionrequirement
+                    {aItem ? 'Edit' : 'Add'} Admissionrequirement
                 </Button>
             </Form>
         );
@@ -129,7 +166,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = {
-    putAdmissionRequirementItem: FetchDataActions.putAdmissionRequirementItem
+    putAdmissionRequirementItem: FetchDataActions.putAdmissionRequirementItem,
+    postAdmissionRequirementItem: FetchDataActions.postAdmissionRequirementItem,
+    fetchCourseInstanceDetail: FetchDataActions.fetchCourseInstanceDetail
 };
 
 

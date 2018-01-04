@@ -16,6 +16,9 @@ class AdmissionRequirement extends Component {
         aReq.displayDate = new Date(aReq.expireDate).toLocaleString();
         return (
             <div onClick={this.props.onClick} className="AdmissionRequirement">
+                <div className="editButton" onClick={this.props.onEdit}>
+                    <i className={'fa fa-edit'}/>
+                </div>
                 <div className="Description">
                     {aReq.description}
                 </div>

@@ -24,10 +24,20 @@ class CourseDetailPanel extends Component {
     addAdmissionRequirement() {
         this.props.openAddAdmissionRequirementItem((admissionRequirementItem) => {
 
-        })
+        }, null);
     }
 
-    openAdmissionRequirementItem(admissionRequirementItem) {
+    editAdmissionRequirement(aItem, event) {
+        // Avoid opening the AdmissionRequirement, too
+        if(event)
+            event.stopPropagation();
+
+        this.props.openAddAdmissionRequirementItem((admissionRequirementItem) => {
+
+        }, aItem);
+    }
+
+    openAdmissionRequirementItem(admissionRequirementItem, isEditMode) {
         this.props.openAdmissionRequirementItem(admissionRequirementItem.id);
     }
 
@@ -53,6 +63,9 @@ class CourseDetailPanel extends Component {
                                     <AdmissionRequirement
                                         onClick={() => {
                                             this.openAdmissionRequirementItem(aItem)
+                                        }}
+                                        onEdit={(event) => {
+                                            this.editAdmissionRequirement(aItem, event)
                                         }}
                                         key={aItem.id}
                                         admissionRequirementItem={aItem}/>

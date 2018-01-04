@@ -82,7 +82,8 @@ export default function locationReducer(state = defaultState, action) {
         case "OPEN_ADMISSIONREQUIREMENTITEM_ADD":
             return {
                 ...state,
-                openAdmissionRequirementAdd: true
+                openAdmissionRequirementAdd: true,
+                aItem: action.aItem
             };
         case "CLOSE_ADMISSIONREQUIREMENTITEM_ADD":
             return {

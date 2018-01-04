@@ -165,6 +165,39 @@ export default {
             payload: axios.put('http://localhost:1337/admissionRequirement/item', transferData, axiosConfig)
         }
     },
+    postAdmissionRequirementItem: (clientToken, courseInstanceId, type, expireDate, minTasks, maxTasks, minPercentage, mandatory, description, aItemId) => {
+        let axiosConfig = {
+            headers: {
+                'X-Token': clientToken
+            }
+        };
+
+        /*
+        * @param {number} courseInstanceId mandatory
+        * @param {number} admissionRequirementType admissionRequirementType
+        * @param {date} expireDate? the date this admissionRequirementItem expires
+        * @param {number} maxTasks? maxTasks for this admissionRequirementItem
+        * @param {number} minTasks? minTasks for this admissionRequirementItem to achieve
+        * @param {float} minPercentage? minPercentage for this admissionRequirementItem to achieve
+        * @param {bool} mandatory? use this admissionRequirementItem to calculate the userprogress
+        * @param {string} description the description of the arItem
+        */
+        const transferData = {
+            admissionRequirementType: type,
+            courseInstanceId: courseInstanceId,
+            expireDate: expireDate,
+            minTasks: minTasks,
+            maxTasks: maxTasks,
+            minPercentage: minPercentage,
+            mandatory: mandatory,
+            description: description
+        };
+
+        return {
+            type: "POST_ADMISSIONREQUIREMENTITEM",
+            payload: axios.post('http://localhost:1337/admissionRequirement/item/' + aItemId, transferData, axiosConfig)
+        }
+    },
     fetchSemester: (clientToken) => {
         const axiosConfig = ActionHelper.generateAxiosConfig(clientToken);
 

@@ -93,8 +93,9 @@ class App extends Component {
               />
               <AdmissionRequirementItemAddPanel
                   showCondition={this.props.state.openAdmissionRequirementAdd}
-                  stackTitle={' Add Admissionrequirement'}
+                  stackTitle={'Admissionrequirements'}
                   hasBack={true}
+                  aItem={this.props.state.aItem}
                   backAction={() => {
                       this.props.closeAddAdmissionRequirementItem();
                   }}
