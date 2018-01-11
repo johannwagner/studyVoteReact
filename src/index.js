@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -12,11 +13,10 @@ import loginReducer from "./Reducers/loginReducer";
 import fetchDataReducer from './Reducers/fetchDataReducer';
 import stateReducer from "./Reducers/stateReducer";
 
-
 let reducers = combineReducers({
     login: loginReducer,
     fetchedData: fetchDataReducer,
-    state: stateReducer,
+    state: stateReducer
 });
 
 let reduxStore = createStore(reducers, applyMiddleware(logger, promise()));
@@ -24,7 +24,7 @@ let reduxStore = createStore(reducers, applyMiddleware(logger, promise()));
 
 ReactDOM.render(
     <Provider store={reduxStore}>
-        <App/>
+            <App/>
     </Provider>
     , document.getElementById('root'));
 registerServiceWorker();

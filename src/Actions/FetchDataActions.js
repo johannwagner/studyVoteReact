@@ -1,5 +1,7 @@
 import * as axios from 'axios';
 import ActionHelper from "./ActionHelper";
+import Globals from "../Constants/Globals";
+//import * as Globals from "../Constants/Globals"
 
 export default {
     fetchProgress: (clientToken, semesterId) => {
@@ -15,7 +17,7 @@ export default {
 
         return {
             type: "FETCH_PROGRESS",
-            payload: axios.get('http://localhost:1337/userProgress', axiosConfig)
+            payload: axios.get(Globals.backendUrl + '/userProgress', axiosConfig)
         }
     },
     fetchCourses: (clientToken, semesterId) => {
@@ -31,7 +33,7 @@ export default {
 
         return {
             type: "FETCH_COURSES",
-            payload: axios.get('http://localhost:1337/courseInstance', axiosConfig)
+            payload: axios.get(Globals.backendUrl + '/courseInstance', axiosConfig)
         }
     },
     putUserCourseInstance: (clientToken, courseInstanceId) => {
@@ -47,7 +49,7 @@ export default {
 
         return {
             type: "PUT_USER_COURSE_INSTANCE",
-            payload: axios.put('http://localhost:1337/userCourseInstance', data, axiosConfig)
+            payload: axios.put(Globals.backendUrl + '/userCourseInstance', data, axiosConfig)
         }
     },
     fetchCourseInstanceDetail: (clientToken, courseInstanceId) => {
@@ -59,7 +61,7 @@ export default {
 
         return {
             type: "GET_COURSE_INSTANCE_DETAIL",
-            payload: axios.get('http://localhost:1337/courseInstance/' + courseInstanceId, axiosConfig)
+            payload: axios.get(Globals.backendUrl + '/courseInstance/' + courseInstanceId, axiosConfig)
         }
     },
     fetchUserProgressPerCourseInstance: (clientToken, courseInstanceId) => {
@@ -71,7 +73,7 @@ export default {
 
         return {
             type: "GET_USER_PROGRESS_PER_COURSE_INSTANCE",
-            payload: axios.get('http://localhost:1337/userProgress/' + courseInstanceId, axiosConfig)
+            payload: axios.get(Globals.backendUrl + '/userProgress/' + courseInstanceId, axiosConfig)
         }
     },
     putAdmissionRequirementItemWeek: (clientToken, admissionRequirementItemId, taskCount, maxCount, semesterWeek, callback) => {
@@ -90,7 +92,7 @@ export default {
 
         return {
             type: "PUT_ADMISSION_REQUIREMENT_ITEM_WEEK",
-            payload: axios.put('http://localhost:1337/userProgress/', data, axiosConfig).then((r) => {
+            payload: axios.put(Globals.backendUrl + '/userProgress/', data, axiosConfig).then((r) => {
                 if(callback) callback();
                 return r;
             })
@@ -105,7 +107,7 @@ export default {
 
         return {
             type: "PUT_USER_ACCOUNT",
-            payload: axios.put('http://localhost:1337/user', transferData)
+            payload: axios.put(Globals.backendUrl + '/user', transferData)
         }
     },
     putCourse: (clientToken, semesterId, shortName, displayName, docent, room, weekDay, startTime, endTime) => {
@@ -128,7 +130,7 @@ export default {
 
         return {
             type: "PUT_COURSE",
-            payload: axios.put('http://localhost:1337/courseInstance', transferData, axiosConfig)
+            payload: axios.put(Globals.backendUrl + '/courseInstance', transferData, axiosConfig)
         }
     },
 
@@ -162,7 +164,7 @@ export default {
 
         return {
             type: "PUT_ADMISSIONREQUIREMENTITEM",
-            payload: axios.put('http://localhost:1337/admissionRequirement/item', transferData, axiosConfig)
+            payload: axios.put(Globals.backendUrl + '/admissionRequirement/item', transferData, axiosConfig)
         }
     },
     postAdmissionRequirementItem: (clientToken, courseInstanceId, type, expireDate, minTasks, maxTasks, minPercentage, mandatory, description, aItemId) => {
@@ -195,7 +197,7 @@ export default {
 
         return {
             type: "POST_ADMISSIONREQUIREMENTITEM",
-            payload: axios.post('http://localhost:1337/admissionRequirement/item/' + aItemId, transferData, axiosConfig)
+            payload: axios.post(Globals.backendUrl + '/admissionRequirement/item/' + aItemId, transferData, axiosConfig)
         }
     },
     fetchSemester: (clientToken) => {
@@ -203,7 +205,7 @@ export default {
 
         return {
             type: "GET_SEMESTER",
-            payload: axios.get('http://localhost:1337/semester', axiosConfig)
+            payload: axios.get(Globals.backendUrl + '/semester', axiosConfig)
         }
     }
 }

@@ -10,8 +10,9 @@ class HorizontalStackPanel extends Component {
         const windowHeight = window.innerHeight;
         const windowWidth = window.innerWidth;
         const stackWidth = 500;
-        const maxVisibleItems = _.floor(windowWidth / stackWidth);
-
+        let maxVisibleItems = _.floor(windowWidth / stackWidth);
+        if(maxVisibleItems === 0)
+            maxVisibleItems++;
         this.setState(
             {
                 windowHeight: windowHeight,
@@ -46,7 +47,7 @@ class HorizontalStackPanel extends Component {
         let children = showChildren.slice(Math.max(-this.state.maxVisibleItems, -showChildren.length)).map((child) => {
 
             return (
-                <div key={child.stackTitle} className="StackChild">
+                <div key={child.stackTitle} className={this.state.maxVisibleItems > 1 ? "StackChild" : "StackChildFull"}>
                     <div className="StackTitle">
                         <div className="StackBack" onClick={child.props.backAction}>
                             {(child.props.hasBack ? <i className="fa fa-arrow-left"/> : null)}
