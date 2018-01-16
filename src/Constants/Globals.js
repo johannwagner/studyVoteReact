@@ -1,3 +1,3 @@
 export default {
-    backendUrl: 'http://85.214.159.6:1337'
+    backendUrl: process.env.REACT_APP_SERVER_HOST && process.env.REACT_APP_SERVER_PORT ? `http://${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}`: 'http://localhost:1337'
 }
