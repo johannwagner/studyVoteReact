@@ -86,7 +86,6 @@ class AdmissionRequirementItemAddPanel extends Component {
 
         return (
             <Form className={'AdmissionRequirementItemAddPanel'}>
-                <h2 className={'header'}> {this.props.aItem ? 'Edit Admissionrequirement' : 'Add Admissionrequirement'} </h2>
                 <FormGroup className={'admissionRequirementType'}>
                     <FormControl
                         componentClass="select"

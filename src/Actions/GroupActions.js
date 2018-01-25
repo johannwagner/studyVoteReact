@@ -9,7 +9,7 @@ export default {
 
         return {
             type: "PUT_COURSE_INSTANCE_GROUP",
-            payload: axios.put(Globals.backendUrl + '/courseInstance/${courseInstanceId}/group/', groupInformation, axiosConfig)
+            payload: axios.put(Globals.backendUrl + `/courseInstance/${courseInstanceId}/group/`, groupInformation, axiosConfig)
         }
     },
     postGroup(clientToken, courseInstanceId, groupId, groupInformation) {
@@ -17,7 +17,7 @@ export default {
 
         return {
             type: "POST_COURSE_INSTANCE_GROUP",
-            payload: axios.post(Globals.backendUrl + '/courseInstance/${courseInstanceId}/group/${groupId}', groupInformation, axiosConfig)
+            payload: axios.post(Globals.backendUrl + `/courseInstance/${courseInstanceId}/group/${groupId}`, groupInformation, axiosConfig)
         }
     }
 }

@@ -56,13 +56,21 @@ class GroupPanel extends Component {
         if(this.props.group) {
             // Reload CourseInstance after editing to get updated groups
             this.props.postGroup(this.props.clientToken, this.props.courseInstanceId,this.props.group.id, transmitData).then(() =>
-                    this.props.fetchCourseInstanceDetail(this.props.clientToken, this.props.courseInstanceId)
-            )
+            {
+                return this.props.fetchCourseInstanceDetail(this.props.clientToken, this.props.courseInstanceId);
+            }
+            ).then(() =>
+            {
+                this.props.backAction();
+            });
         } else {
-            this.props.putGroup(this.props.clientToken, this.props.courseInstanceId, transmitData);
+            this.props.putGroup(this.props.clientToken, this.props.courseInstanceId, transmitData).then(() =>
+            {
+                this.props.backAction();
+            })
         }
 
-        this.props.backAction();
+
     }
 
     render() {
@@ -84,8 +92,6 @@ class GroupPanel extends Component {
 
         return (
             <Form className={'GroupPanel'}>
-
-                <h2 className={'header'}> {this.props.group ? 'Edit Group' : 'Add Group'} </h2>
                 <FormGroup className={'room'}>
                     <FormControl
                         inputRef={ref => this.roomRef = ref}
