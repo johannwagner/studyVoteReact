@@ -13,7 +13,7 @@ class ProgressItem extends Component {
 
         return <div className="ProgressItem" onClick={this.props.onClick}>
             <div className="ProgressName">
-                {String(pItem.courseInstance.displayName).length < 20 ?
+                {String(pItem.courseInstance.displayName).length < 15 ?
                     pItem.courseInstance.displayName :
                     pItem.courseInstance.shortName }
             </div>

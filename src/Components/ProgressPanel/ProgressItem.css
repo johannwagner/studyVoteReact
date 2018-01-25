@@ -5,7 +5,7 @@
 
     grid-template-areas:
             "progressName progressBar"
-            "progressName progressInformation";
+            "progressName progressBar";
 
     grid-row-gap: 10px;
 

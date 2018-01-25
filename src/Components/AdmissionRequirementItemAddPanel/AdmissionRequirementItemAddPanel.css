@@ -2,7 +2,7 @@
 
     display: grid;
 
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(8, auto);
     grid-template-columns: repeat(3, 1fr);
 
     grid-template-areas:
@@ -27,6 +27,8 @@
 
 .mandatory  {
     grid-area: mandatory;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .admissionRequirementType  {
     grid-area: admissionRequirementType;
