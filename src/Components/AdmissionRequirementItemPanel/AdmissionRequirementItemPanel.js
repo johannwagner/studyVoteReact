@@ -7,6 +7,7 @@ import './AdmissionRequirementItemPanel.css'
 import * as axios from 'axios';
 import * as _ from 'lodash';
 import AdmissionRequirementItemEvent from "./AdmissionRequirementItemEvent";
+import Globals from "../../Constants/Globals";
 
 class AdmissionRequirementItemPanel extends React.Component {
 
@@ -46,7 +47,7 @@ class AdmissionRequirementItemPanel extends React.Component {
 
     componentDidMount() {
         this.props.fetchUserProgressPerCourseInstance(this.props.clientToken, this.props.courseInstanceId);
-        axios.get('http://localhost:1337/semester/' + this.props.semesterId + '/currentWeek', {headers: {'X-Token': this.props.clientToken}}).then((data) => {
+        axios.get(Globals.backendUrl +'/semester/' + this.props.semesterId + '/currentWeek', {headers: {'X-Token': this.props.clientToken}}).then((data) => {
             this.setState({
                 semesterWeek: data.data.semesterWeek,
                 lastSemesterWeek: data.data.semesterWeek
@@ -102,21 +103,6 @@ class AdmissionRequirementItemPanel extends React.Component {
         ].sort((firstItem, secondItem) => firstItem.semesterWeek - secondItem.semesterWeek);
 
         return [
-            <div className="AdmissionRequirementItem">
-                {weekDisplayContainer.map(displayItem => {
-                    return (
-                        <AdmissionRequirementItemWeek
-                            onClick={() => {
-                                this.setState({semesterWeek: displayItem.semesterWeek})
-                            }}
-                            key={displayItem.semesterWeek}
-                            emptyWeek={displayItem.isEmpty}
-                            weekNumber={displayItem.semesterWeek}
-                            aItem={displayItem.aItem}
-                        />
-                    )
-                })}
-            </div>,
             <div className="NewItem">
                 <h4>New Entry for Week {this.state.semesterWeek}</h4>
                 <FormControl
@@ -139,7 +125,23 @@ class AdmissionRequirementItemPanel extends React.Component {
                 >
                     Change
                 </Button>
+            </div>,
+            <div className="AdmissionRequirementItem">
+                {weekDisplayContainer.map(displayItem => {
+                    return (
+                        <AdmissionRequirementItemWeek
+                            onClick={() => {
+                                this.setState({semesterWeek: displayItem.semesterWeek})
+                            }}
+                            key={displayItem.semesterWeek}
+                            emptyWeek={displayItem.isEmpty}
+                            weekNumber={displayItem.semesterWeek}
+                            aItem={displayItem.aItem}
+                        />
+                    )
+                })}
             </div>
+
         ]
     }
 
