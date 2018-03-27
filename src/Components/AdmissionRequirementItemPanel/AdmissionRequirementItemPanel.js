@@ -152,7 +152,7 @@ class AdmissionRequirementItemPanel extends React.Component {
         let buttonText = 'Failed';
 
         // Handle cases if progress is already in DB or not
-        if(!this.props.userProgressPerCourseInstance.progress) {
+        if(!progress) {
             // Build up display objects
             progress = [
                 {
@@ -178,7 +178,7 @@ class AdmissionRequirementItemPanel extends React.Component {
         }
 
         // Passed/Failed difference
-        if(progress[0].result.tasksSolved)
+        if(progress[0].aItem.result.tasksSolved)
         {
             this.eventTasksDone = 0;
         }

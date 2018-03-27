@@ -66,6 +66,10 @@ class LoginPanel extends Component {
         )
     }
 
+    /**                    <Button bsStyle={"primary"} className={'firstButton'}>
+     Forgot Password
+     </Button>**/
+
     render() {
         return (
             <div className="LoginPanel">
@@ -85,9 +89,6 @@ class LoginPanel extends Component {
 
                     <Button onClick={this.loginWithCredentials.bind(this)} bsStyle={"success"} className={'firstButton'}>
                         Login
-                    </Button>
-                    <Button bsStyle={"primary"} className={'firstButton'}>
-                        Forgot Password
                     </Button>
                     <Button onClick={ this.state.isDisplayNameOpen ? this.createAccountWithCredentials.bind(this) : this.openDisplayName.bind(this) } bsStyle={"danger"}>
                         Create Account

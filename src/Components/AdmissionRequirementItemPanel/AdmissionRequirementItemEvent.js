@@ -13,7 +13,7 @@ class AdmissionRequirementItemEvent extends React.Component {
             <div className="eventDate">
                 Expiredate: {expireDate.toLocaleString()}
             </div>,
-            <div className="progress">
+            <div className="eventProgress">
                     <ProgressBar
                 now={progressBar}
                 label={`${progressBar}%`}
